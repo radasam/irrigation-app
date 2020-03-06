@@ -26,7 +26,7 @@ class App extends React.Component{
 	burst(pump, duration){
 		console.log('starting pump')
 		var body = {pump:pump,duration:duration}
-		axios.post('http://192.168.1.88:4000/burst', body, {crossdomain:true}).then((res) =>{
+		axios.post('http://437b872a.ngrok.io/burst', body, {crossdomain:true}).then((res) =>{
 			console.log(res)
 		}, (err) => {
 			console.log(err)
