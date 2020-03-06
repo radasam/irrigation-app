@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/irrigation-app/precache-manifest.0d9ec1c1a92a24a00af9333e3043366b.js"
+  "/irrigation-app/precache-manifest.0d0cbfe3b542fe73fdc1a73542dfe629.js"
 );
 
 self.addEventListener('message', (event) => {
