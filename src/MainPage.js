@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import PasswordModal from './PasswordModal'
+import PumpSettings from './PumpSettings'
 
 class MainPage extends React.Component{
 	constructor(props) {
@@ -327,6 +328,7 @@ class MainPage extends React.Component{
 						</Col>
 					</Row>
 				</span>
+				<PumpSettings option={'Off'}></PumpSettings>
 				<br></br>
 				<div id="sensor1chart"></div>
 				<div id="pump1chart"></div>

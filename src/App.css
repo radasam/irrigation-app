@@ -45,7 +45,8 @@
 }
 
 .pumprow{
-	padding-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .heading{
@@ -63,3 +64,8 @@
 	margin-right:10px
 }
 
+.pumpsettings{
+  border:1px solid black;
+  border-radius: 3px;
+  padding: 10px;
+}
