@@ -2,7 +2,7 @@
   "name": "water-front-end",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://gitname.github.io/react-gh-pages",
+  "homepage": "http://radasam.github.io/irrigation-app",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",

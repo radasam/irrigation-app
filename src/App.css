@@ -37,6 +37,13 @@
   }
 }
 
+.settings{
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
 .pumprow{
 	padding-left: 10px;
 }
