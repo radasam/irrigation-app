@@ -44,23 +44,38 @@ class PumpSettings extends React.Component{
                     <div>
                         <Form.Group>
                         {[...Array(this.state.forms).keys()].map(i => {
-                            return(                            
-                                <Form.Row key={i}>
-                                    <Form.Label column="sm" lg={0.5}>Time</Form.Label>
-                                    <Col>
-                                        <Form.Control type="time"></Form.Control>
-                                    </Col>    
-                                    <Form.Label column="sm" lg={0.5}>Duration</Form.Label>
-                                    <Col>
-                                    <Form.Control type="number"></Form.Control>
-                                    </Col>                           
-                                </Form.Row>)
+                            if(i == 0){
+                                return(                            
+                                    <Form.Row key={i}>
+                                        <Form.Label column="sm" lg={0.5}>Time</Form.Label>
+                                        <Col>
+                                            <Form.Control type="time"></Form.Control>
+                                        </Col>    
+                                        <Form.Label column="sm" lg={0.5}>Duration</Form.Label>
+                                        <Col>
+                                        <Form.Control type="number"></Form.Control>
+                                        </Col>                           
+                                    </Form.Row>)
+                            } else {
+                                return(                            
+                                    <Form.Row key={i} style={{paddingTop:'5px'}}>
+                                        <Form.Label column="sm" lg={0.5}>Time</Form.Label>
+                                        <Col>
+                                            <Form.Control type="time"></Form.Control>
+                                        </Col>    
+                                        <Form.Label column="sm" lg={0.5}>Duration</Form.Label>
+                                        <Col>
+                                        <Form.Control type="number"></Form.Control>
+                                        </Col>                           
+                                    </Form.Row>)                               
+                            }
+
                         })}
                         </Form.Group>
                         <Row>
                             <Col>
                                 <Button size="sm" style={{float:'right'}}>Save</Button>
-                                <Button size="sm" style={{float:'right',paddingRight:'17px',paddingLeft:'17px', marginRight:'10px'}}>+</Button>
+                                <Button onClick={e => this.addForm()} size="sm" style={{float:'right',paddingRight:'17px',paddingLeft:'17px', marginRight:'10px'}}>+</Button>
                             </Col>
                         </Row>
                     </div>
@@ -73,8 +88,7 @@ class PumpSettings extends React.Component{
         this.setState({option:document.getElementById('pumpSettingsOption').value})
     }
     addForm(){
-        var newforms = this.state.forms + 1
-        this.setState({forms:newforms})
+        this.setState({forms:this.state.forms + 1})
     }
 	render(){
 	  return (
