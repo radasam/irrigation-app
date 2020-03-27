@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import ReactDom from 'react-dom';
 import './App.css';
 
@@ -28,13 +29,13 @@ class PumpSettings extends React.Component{
                             <Form.Row>
                                 <Form.Label column="sm" lg={2}>Water Threshold</Form.Label>
                                 <Col>
-                                    <Form.Control type="number"></Form.Control>
+                                    <Form.Control controlId={'threshold'+this.props.id} type="number"></Form.Control>
                                 </Col>
                             </Form.Row>
                         </Form.Group>
                         <Row>
                             <Col>
-                                <Button style={{float:'right'}}>Save</Button>
+                                <Button onClick={(e) => this.saveSettings()} style={{float:'right'}}>Save</Button>
                             </Col>
                         </Row>
                     </div>
@@ -49,11 +50,11 @@ class PumpSettings extends React.Component{
                                     <Form.Row key={i}>
                                         <Form.Label column="sm" lg={0.5}>Time</Form.Label>
                                         <Col>
-                                            <Form.Control type="time"></Form.Control>
+                                            <Form.Control id={'time-'+ this.props.id + '-' + i} type="time"></Form.Control>
                                         </Col>    
                                         <Form.Label column="sm" lg={0.5}>Duration</Form.Label>
                                         <Col>
-                                        <Form.Control type="number"></Form.Control>
+                                        <Form.Control id={'duration-'+ this.props.id + '-' + i} type="number"></Form.Control>
                                         </Col>                           
                                     </Form.Row>)
                             } else {
@@ -61,11 +62,11 @@ class PumpSettings extends React.Component{
                                     <Form.Row key={i} style={{paddingTop:'5px'}}>
                                         <Form.Label column="sm" lg={0.5}>Time</Form.Label>
                                         <Col>
-                                            <Form.Control type="time"></Form.Control>
+                                            <Form.Control id={'time-'+ this.props.id + '-' + i} type="time"></Form.Control>
                                         </Col>    
                                         <Form.Label column="sm" lg={0.5}>Duration</Form.Label>
                                         <Col>
-                                        <Form.Control type="number"></Form.Control>
+                                        <Form.Control id={'duration-'+ this.props.id + '-' + i} type="number"></Form.Control>
                                         </Col>                           
                                     </Form.Row>)                               
                             }
@@ -74,7 +75,7 @@ class PumpSettings extends React.Component{
                         </Form.Group>
                         <Row>
                             <Col>
-                                <Button size="sm" style={{float:'right'}}>Save</Button>
+                                <Button onClick={(e) => this.saveSettings()} size="sm" style={{float:'right'}}>Save</Button>
                                 <Button onClick={e => this.addForm()} size="sm" style={{float:'right',paddingRight:'17px',paddingLeft:'17px', marginRight:'10px'}}>+</Button>
                             </Col>
                         </Row>
@@ -89,6 +90,66 @@ class PumpSettings extends React.Component{
     }
     addForm(){
         this.setState({forms:this.state.forms + 1})
+    }
+    saveSettings(){
+        
+        var ngrokaddr = 'https://19d7bd9d.ngrok.io'
+
+        if(localStorage.ngrok){
+
+            ngrokaddr = localStorage.ngrok
+        }
+
+        var body = {}
+
+        if(this.state.option == 'Schedule'){
+            var times = ''
+            var durations = ''
+            var nextElement = ''
+            var scheduleElements = null
+
+            scheduleElements = document.evaluate("//input[contains(@id,'time-1')]",document, null,XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
+            while(nextElement !== null){
+                nextElement = scheduleElements.iterateNext()
+                if(nextElement){
+                    times = times + nextElement.value + ';'
+                }
+            }
+            
+            nextElement = ''
+            scheduleElements = document.evaluate("//input[contains(@id,'duration-1')]",document, null,XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
+            while(nextElement !== null){
+                nextElement = scheduleElements.iterateNext()
+                if(nextElement){
+                    durations = durations + nextElement.value + ';'
+                }
+            }
+
+            times = times.substring(0, times.length-1)
+            durations = durations.substring(0, durations.length-1)
+
+            body.times = times
+            body.durations = durations
+        }
+
+        switch(this.state.option){
+            case 'Off':
+                body = {pumpid:this.props.id,type:'off',pass:document.getElementById('postpass').value}
+                break;
+            case 'Auto Water':
+                body = {pumpid:this.props.id,type:'auto',threshold:parseInt(document.getElementById('threshold'+this.props.id).value), pass:document.getElementById('postpass').value}
+                break;
+            case 'Schedule':
+                body.pumpid = this.props.id
+                body.type = 'schedule'
+                break;
+            default:
+                body = {}
+        }   
+
+		axios.post(ngrokaddr + '/updatestatus', body, {crossdomain:true}).then((res) =>{
+			console.log(res.data)
+		})
     }
 	render(){
 	  return (

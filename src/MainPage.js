@@ -328,7 +328,7 @@ class MainPage extends React.Component{
 						</Col>
 					</Row>
 				</span>
-				<PumpSettings option={'Off'}></PumpSettings>
+				<PumpSettings id={1} option={'Off'}></PumpSettings>
 				<br></br>
 				<div id="sensor1chart"></div>
 				<div id="pump1chart"></div>
