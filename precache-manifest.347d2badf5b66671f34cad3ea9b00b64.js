@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8677aa9bea5a90f68952f0f0c28fd4cc",
+    "revision": "c75b6e71d09018e0d18a812e63dedeb5",
     "url": "/irrigation-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/irrigation-app/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "66a7860cbcf1935f887e",
+    "revision": "bf877292c184d5360669",
     "url": "/irrigation-app/static/css/main.c77751fe.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/irrigation-app/static/js/2.fb7cf4a3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "66a7860cbcf1935f887e",
-    "url": "/irrigation-app/static/js/main.5134dd35.chunk.js"
+    "revision": "bf877292c184d5360669",
+    "url": "/irrigation-app/static/js/main.1e6bb2d3.chunk.js"
   },
   {
     "revision": "2e1c5f6208aefc8879cf",
